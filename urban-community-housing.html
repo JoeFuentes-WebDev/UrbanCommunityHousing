@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urban Community Housing — San Francisco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --steel:#232C38; --steel-2:#2D3846; --concrete:#8E97A3;
+    --brass:#C9A227; --clay:#B4632E; --plaster:#EFE6D8;
+    --paper:#FAF8F4; --ink:#1B1F24; --ink-soft:#4B4F55;
+    --line:rgba(27,31,36,0.12); --line-on-dark:rgba(255,255,255,0.16);
+    --max:1100px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'Source Serif 4', Georgia, serif; line-height:1.6;}
+  h1,h2,h3{font-family:'Fraunces', Georgia, serif; font-weight:600; margin:0 0 0.5em; letter-spacing:-0.01em;}
+  .eyebrow{font-family:'Space Grotesk', sans-serif; text-transform:uppercase; letter-spacing:0.14em; font-size:0.72rem; font-weight:500; display:inline-block; margin-bottom:1.1em;}
+  a{color:inherit;} button{font-family:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  .section{padding:88px 0;}
+  @media (max-width:640px){ .section{padding:56px 0;} }
+
+  /* HERO */
+  .hero{background:radial-gradient(1100px 500px at 15% -10%, rgba(201,162,39,0.12), transparent 60%), linear-gradient(180deg, var(--steel) 0%, var(--steel-2) 100%); color:var(--paper); padding:110px 0 90px;}
+  .hero .eyebrow{color:var(--brass);}
+  .hero h1{font-size:clamp(2.2rem, 5vw, 3.8rem); color:#fff; max-width:15ch; line-height:1.1;}
+  .hero .sub{font-size:clamp(1rem, 1.5vw, 1.25rem); color:rgba(250,248,244,0.78); max-width:48ch; margin:0.6em 0 2em;}
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap; align-items:center;}
+  .btn{font-family:'Space Grotesk', sans-serif; font-weight:500; font-size:0.9rem; padding:13px 24px; border-radius:3px; border:1px solid transparent; cursor:pointer; display:inline-flex; align-items:center; gap:8px; text-decoration:none; transition:transform .15s;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn:focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+  .btn-primary{background:var(--brass); color:var(--steel);}
+  .btn-ghost{background:transparent; color:var(--paper); border-color:var(--line-on-dark);}
+  .btn-clay{background:var(--clay); color:#fff;}
+  .btn-clay:hover{background:#C6702F;}
+  .btn-outline{background:transparent; border-color:rgba(27,31,36,0.25); color:var(--ink);}
+
+  /* REFRAME */
+  .reframe{background:linear-gradient(180deg, var(--steel-2) 0%, #4B4F58 45%, var(--plaster) 100%); color:#fff; padding-top:80px;}
+  .reframe .eyebrow{color:var(--brass);}
+  .reframe-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+  @media (max-width:760px){ .reframe-grid{grid-template-columns:1fr;} }
+  .reframe h2{font-size:clamp(1.5rem,3vw,2.2rem); color:#fff; max-width:18ch;}
+  .reframe p{color:rgba(255,255,255,0.82); font-size:1.05rem; max-width:42ch;}
+
+  /* MODEL */
+  .model{background:var(--plaster);}
+  .model .eyebrow{color:var(--clay);}
+  .model-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:52px; align-items:center;}
+  @media (max-width:820px){ .model-grid{grid-template-columns:1fr;} }
+  .model h2{font-size:clamp(1.6rem,3vw,2.2rem); max-width:14ch;}
+  .model p{color:var(--ink-soft); font-size:1.03rem; max-width:44ch;}
+  .model-caption{font-family:'Space Grotesk', sans-serif; font-size:0.78rem; color:var(--ink-soft); margin-top:12px;}
+
+  /* GALLERY */
+  .gallery{background:var(--steel); color:var(--paper);}
+  .gallery .eyebrow{color:var(--brass);}
+  .gallery h2{color:#fff; font-size:clamp(1.5rem,3vw,2.1rem); max-width:22ch;}
+  .gallery > .wrap > p.lead{color:rgba(255,255,255,0.68); max-width:58ch; font-size:1rem; margin-bottom:2.2em;}
+  .gal-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  @media (max-width:900px){ .gal-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .gal-grid{grid-template-columns:1fr;} }
+  .gal-card{background:var(--steel-2); border:1px solid var(--line-on-dark); border-radius:6px; overflow:hidden;}
+  .gal-img{aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; background:
+      repeating-linear-gradient(45deg, rgba(201,162,39,0.06), rgba(201,162,39,0.06) 10px, transparent 10px, transparent 20px);
+      position:relative; overflow:hidden;}
+  .gal-img svg{width:60%; height:60%; opacity:0.85;}
+  .gal-img img{width:100%; height:100%; object-fit:cover; display:block;}
+  .gal-label{padding:12px 14px 14px;}
+  .gal-name{font-family:'Space Grotesk', sans-serif; font-size:0.86rem; color:#fff; font-weight:500;}
+  .gal-tag{font-family:'Space Grotesk', sans-serif; font-size:0.7rem; color:var(--brass); margin-top:3px; letter-spacing:0.02em;}
+
+  /* COMMUNITY / WHO */
+  .who{background:var(--paper);}
+  .who .eyebrow{color:var(--clay);}
+  .who h2{font-size:clamp(1.6rem,3vw,2.2rem); max-width:22ch;}
+  .hook-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:2em;}
+  @media (max-width:700px){ .hook-grid{grid-template-columns:1fr;} }
+  .hook-card{background:var(--plaster); border-radius:6px; padding:24px 22px;}
+  .hook-card .tag{font-family:'Space Grotesk', sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--clay); margin-bottom:10px; display:block;}
+  .hook-card p{margin:0; font-size:1.02rem; color:var(--ink);}
+  .tagline{margin-top:36px; text-align:center;}
+  .tagline p{font-family:'Fraunces', serif; font-style:italic; font-size:1.3rem; color:var(--ink); max-width:36ch; margin:0 auto;}
+
+  /* THIS WEEK BOARD */
+  .board{background:var(--plaster);}
+  .board .eyebrow{color:var(--clay);}
+  .board h2{font-size:clamp(1.5rem,3vw,2.1rem); max-width:20ch;}
+  .board-list{list-style:none; padding:0; margin:2em 0 0; display:grid; gap:12px;}
+  .board-item{background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:16px 20px; display:flex; gap:16px; align-items:baseline;}
+  .board-item .day{font-family:'Space Grotesk', sans-serif; font-size:0.78rem; color:var(--clay); min-width:80px; text-transform:uppercase; letter-spacing:0.04em;}
+  .board-item .what{font-size:1rem; color:var(--ink);}
+  .board-item .what b{font-weight:600;}
+
+  /* PRICING */
+  .pricing{background:var(--paper);}
+  .pricing .eyebrow{color:var(--clay);}
+  .pricing h2{font-size:clamp(1.5rem,3vw,2.1rem); max-width:20ch;}
+  .tier-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:2em;}
+  @media (max-width:900px){ .tier-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .tier-grid{grid-template-columns:1fr;} }
+  .tier{border:1px solid var(--line); border-radius:6px; padding:20px;}
+  .tier.core{background:var(--steel); color:#fff; border-color:var(--steel);}
+  .tier .tname{font-family:'Space Grotesk', sans-serif; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; opacity:0.85;}
+  .tier.core .tname{color:var(--brass);}
+  .tier:not(.core) .tname{color:var(--clay);}
+  .tier ul{margin:0; padding-left:18px; font-size:0.92rem;}
+  .tier.core ul{color:rgba(255,255,255,0.85);}
+  .tier:not(.core) ul{color:var(--ink-soft);}
+  .tier li{margin-bottom:4px;}
+
+  /* TABS SECTION */
+  .paths{background:var(--plaster);}
+  .paths-head{max-width:640px; margin-bottom:2.4em;}
+  .paths .eyebrow{color:var(--clay);}
+  .paths h2{font-size:clamp(1.7rem,3.2vw,2.3rem);}
+  .paths p.lead{color:var(--ink-soft); font-size:1.04rem;}
+  .path-tabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px;}
+  .path-tab{font-family:'Space Grotesk', sans-serif; font-size:0.88rem; font-weight:500; padding:11px 20px; border-radius:22px; border:1px solid rgba(27,31,36,0.2); background:var(--paper); color:var(--ink-soft); cursor:pointer;}
+  .path-tab.active{background:var(--steel); color:#fff; border-color:var(--steel);}
+  .path-tab:focus-visible{outline:2px solid var(--clay); outline-offset:2px;}
+  .path-panel{display:none;}
+  .path-panel.active{display:block;}
+
+  .faq{display:grid; gap:12px; margin-bottom:32px;}
+  .faq-item{background:var(--paper); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  .faq-q{width:100%; text-align:left; background:none; border:none; padding:18px 20px; font-family:'Space Grotesk', sans-serif; font-size:0.96rem; font-weight:500; color:var(--ink); cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:12px;}
+  .faq-q:focus-visible{outline:2px solid var(--clay); outline-offset:-2px;}
+  .faq-q .chevron{transition:transform .2s; flex-shrink:0; font-size:0.8rem; color:var(--clay);}
+  .faq-item.open .chevron{transform:rotate(180deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .faq-a-inner{padding:0 20px 20px; color:var(--ink-soft); font-size:0.98rem;}
+  .faq-item.open .faq-a{max-height:400px;}
+
+  .form-card{background:var(--paper); border-radius:8px; padding:32px 28px; max-width:560px; border:1px solid var(--line);}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-family:'Space Grotesk', sans-serif; font-size:0.82rem; color:var(--ink-soft); margin-bottom:7px;}
+  .field input[type=text], .field input[type=email], .field textarea, .field select{width:100%; font-family:'Source Serif 4', serif; font-size:1rem; padding:11px 13px; border-radius:4px; border:1px solid rgba(27,31,36,0.22); background:var(--paper); color:var(--ink);}
+  .field textarea{resize:vertical; min-height:64px;}
+  .field input:focus-visible, .field textarea:focus-visible, .field select:focus-visible{outline:2px solid var(--clay); outline-offset:1px;}
+  .radio-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .radio-opt{font-family:'Space Grotesk', sans-serif; font-size:0.84rem; padding:9px 15px; border-radius:20px; border:1px solid rgba(27,31,36,0.22); cursor:pointer; background:var(--paper); color:var(--ink-soft); user-select:none;}
+  .radio-opt input{position:absolute; opacity:0; pointer-events:none;}
+  .radio-opt.checked{background:var(--clay); color:#fff; border-color:var(--clay);}
+  .submit-row{margin-top:22px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;}
+  .status-msg{font-family:'Space Grotesk', sans-serif; font-size:0.85rem; color:var(--ink-soft);}
+  .status-msg.ok{color:#5C7A3A;} .status-msg.err{color:var(--clay);}
+  .momentum{margin-top:28px; font-family:'Space Grotesk', sans-serif; font-size:0.85rem; color:var(--ink-soft);}
+  .momentum b{font-family:'Fraunces', serif; font-size:1.3rem; color:var(--clay); display:block; margin-bottom:2px;}
+
+  footer{background:var(--steel); color:rgba(250,248,244,0.5); padding:40px 0; font-family:'Space Grotesk', sans-serif; font-size:0.78rem;}
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; align-items:center;}
+  footer b{color:rgba(250,248,244,0.85);}
+  footer .admin-link{color:rgba(250,248,244,0.28); text-decoration:none;}
+  footer .admin-link:hover{color:rgba(250,248,244,0.5);}
+
+  /* ADMIN */
+  #admin-view{display:none; background:var(--paper); min-height:100vh; padding:60px 0;}
+  #admin-view.active{display:block;}
+  #admin-view .wrap{max-width:900px;}
+  .admin-gate{max-width:360px; margin:80px auto; text-align:center;}
+  .admin-gate input{width:100%; padding:12px; font-family:'Space Grotesk',sans-serif; border:1px solid var(--line); border-radius:4px; margin:14px 0;}
+  .admin-table{width:100%; border-collapse:collapse; margin-bottom:40px; font-size:0.88rem;}
+  .admin-table th, .admin-table td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); font-family:'Space Grotesk', sans-serif;}
+  .admin-table th{color:var(--ink-soft); font-weight:500; font-size:0.76rem; text-transform:uppercase; letter-spacing:0.04em;}
+  .admin-empty{color:var(--ink-soft); font-family:'Space Grotesk',sans-serif; font-size:0.86rem; padding:10px 0 30px;}
+</style>
+</head>
+<body>
+
+<div id="main-view">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">San Francisco &nbsp;/&nbsp; Concept Stage</span>
+    <h1>Why does an empty office have to become another apartment?</h1>
+    <p class="sub">A proposal for a different kind of home in San Francisco — private rooms, real shared space, and a community that isn't sorted by who you are.</p>
+    <div class="cta-row">
+      <a href="#paths" class="btn btn-primary">Find your path →</a>
+      <a href="#model" class="btn btn-ghost">See the idea</a>
+    </div>
+  </div>
+</section>
+
+<!-- REFRAME -->
+<section class="reframe">
+  <div class="wrap">
+    <span class="eyebrow">The reframe</span>
+    <div class="reframe-grid">
+      <div>
+        <h2>"Apartment" is the default answer. It doesn't have to be the only one.</h2>
+        <p>San Francisco has vacant office floors and a housing shortage at the same time. The instinct is to convert one into the other, using the same product we've always built. That's one option — not the only one.</p>
+      </div>
+      <div>
+        <p style="color:rgba(255,255,255,0.82); font-size:1.05rem;">San Francisco just committed <b style="color:var(--brass)">$610.5M</b> through a new downtown financing district specifically to fund office-to-housing conversions. About 50 buildings qualify. Nobody's proposed the shared-community version yet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODEL -->
+<section class="model section" id="model">
+  <div class="wrap">
+    <span class="eyebrow">The model</span>
+    <div class="model-grid">
+      <div>
+        <svg viewBox="0 0 320 220" width="100%" height="auto" role="img" aria-label="Floor plan diagram showing one private room surrounded by shared kitchen, lounge, and common space">
+          <g stroke="#B99A6A" stroke-width="1.4" fill="none">
+            <rect x="8" y="8" width="90" height="90"/>
+            <rect x="106" y="8" width="90" height="90" fill="#B4632E" fill-opacity="0.14"/>
+            <rect x="204" y="8" width="108" height="90"/>
+            <rect x="8" y="106" width="140" height="106"/>
+            <rect x="156" y="106" width="156" height="52"/>
+            <rect x="156" y="166" width="156" height="46"/>
+          </g>
+          <text x="151" y="55" font-family="Space Grotesk" font-size="9" fill="#B4632E" text-anchor="middle">YOUR ROOM</text>
+          <text x="53" y="55" font-family="Space Grotesk" font-size="8" fill="#8E97A3" text-anchor="middle">SHARED</text>
+          <text x="258" y="55" font-family="Space Grotesk" font-size="8" fill="#8E97A3" text-anchor="middle">SHARED</text>
+          <text x="78" y="162" font-family="Space Grotesk" font-size="8" fill="#8E97A3" text-anchor="middle">SHARED</text>
+          <text x="234" y="135" font-family="Space Grotesk" font-size="8" fill="#8E97A3" text-anchor="middle">SHARED</text>
+          <text x="234" y="192" font-family="Space Grotesk" font-size="8" fill="#8E97A3" text-anchor="middle">SHARED</text>
+        </svg>
+        <div class="model-caption">One private module. Five shared ones. The ratio is the product.</div>
+      </div>
+      <div>
+        <h2>Your own room. Everything else, shared.</h2>
+        <p>Locked door, your space, your rules. Kitchen, bathroom, lounge, rooftop — shared with people actually building a life in this city, same as you. Some amenities are bundled in. Others — a gym, a coworking room — you add only if you'll use them, so nobody subsidizes space they'll never touch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery section">
+  <div class="wrap">
+    <span class="eyebrow">What it could look like</span>
+    <h2>This doesn't exist yet. Here's the idea, sketched honestly.</h2>
+    <p class="lead">Concept renders, not photographs — because there isn't a real building yet. Each one is labeled for what it is.</p>
+    <div class="gal-grid">
+
+      <div class="gal-card">
+        <div class="gal-img"><img src="images/private-room.png" alt="Concept render of a private room" loading="lazy"></div>
+        <div class="gal-label"><div class="gal-name">Private room</div><div class="gal-tag">Concept render</div></div>
+      </div>
+
+      <div class="gal-card">
+        <div class="gal-img"><img src="images/dining.png" alt="Concept render of shared dining" loading="lazy"></div>
+        <div class="gal-label"><div class="gal-name">Shared dining</div><div class="gal-tag">Concept render</div></div>
+      </div>
+
+      <div class="gal-card">
+        <div class="gal-img"><img src="images/recroom.png" alt="Concept render of the rec room" loading="lazy"></div>
+        <div class="gal-label"><div class="gal-name">Rec room</div><div class="gal-tag">Concept render</div></div>
+      </div>
+
+      <div class="gal-card">
+        <div class="gal-img"><img src="images/gym.png" alt="Concept render of the gym" loading="lazy"></div>
+        <div class="gal-label"><div class="gal-name">Gym</div><div class="gal-tag">Concept render</div></div>
+      </div>
+
+      <div class="gal-card">
+        <div class="gal-img"><img src="images/lounge.png" alt="Concept render of the reading and lounge area" loading="lazy"></div>
+        <div class="gal-label"><div class="gal-name">Reading &amp; lounge</div><div class="gal-tag">Concept render</div></div>
+      </div>
+
+      <div class="gal-card">
+        <div class="gal-img"><img src="images/coworking.png" alt="Concept render of the work-from-home space" loading="lazy"></div>
+        <div class="gal-label"><div class="gal-name">Work-from-home space</div><div class="gal-tag">Concept render</div></div>
+      </div>
+
+      <div class="gal-card">
+        <div class="gal-img"><img src="images/rooftop.png" alt="Concept render of the rooftop commons" loading="lazy"></div>
+        <div class="gal-label"><div class="gal-name">Rooftop commons</div><div class="gal-tag">Concept render</div></div>
+      </div>
+
+      <div class="gal-card">
+        <div class="gal-img"><img src="images/potluck.png" alt="Concept render of a Sunday potluck" loading="lazy"></div>
+        <div class="gal-label"><div class="gal-name">Sunday potluck</div><div class="gal-tag">Concept render</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHO / HOOKS -->
+<section class="who section">
+  <div class="wrap">
+    <span class="eyebrow">Who this is for</span>
+    <h2>Not a building for one kind of person. A building for a city's worth of them.</h2>
+    <div class="hook-grid">
+      <div class="hook-card">
+        <span class="tag">New graduate</span>
+        <p>You don't have to choose between living at home and living alone. There's a third option — and it's yours.</p>
+      </div>
+      <div class="hook-card">
+        <span class="tag">Their parents</span>
+        <p>You want them independent. You also want them safe, and around good people. What if you didn't have to choose?</p>
+      </div>
+      <div class="hook-card">
+        <span class="tag">An aging parent</span>
+        <p>You've spent a lifetime building your own life on your own terms. This is a bigger version of that — with people around, on your schedule.</p>
+      </div>
+      <div class="hook-card">
+        <span class="tag">New to the city</span>
+        <p>You already did the hard part — you moved. This is where you plant your feet and start building something.</p>
+      </div>
+    </div>
+    <div class="tagline">
+      <p>"It's not about who you are. It's about how you behave."</p>
+    </div>
+  </div>
+</section>
+
+<!-- THIS WEEK BOARD -->
+<section class="board section">
+  <div class="wrap">
+    <span class="eyebrow">Community, made concrete</span>
+    <h2>This week in the building</h2>
+    <ul class="board-list">
+      <li class="board-item"><span class="day">Wed, 7pm</span><span class="what"><b>Ping pong tournament</b> — Sally's the reigning champion. She will remind you of this.</span></li>
+      <li class="board-item"><span class="day">Thu, 8pm</span><span class="what"><b>Jam session</b> — guitar, voice, whatever you've got. No pressure to be good.</span></li>
+      <li class="board-item"><span class="day">Daily, 7–9am</span><span class="what"><b>Rooftop coffee</b> — no agenda. Just whoever's up.</span></li>
+      <li class="board-item"><span class="day">Sun, 6pm</span><span class="what"><b>Potluck</b> — bring a dish from wherever you're from. Or bring nothing and show up anyway.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing section">
+  <div class="wrap">
+    <span class="eyebrow">How pricing works</span>
+    <h2>Pay for what you use. Nothing you don't.</h2>
+    <div class="tier-grid">
+      <div class="tier core">
+        <div class="tname">Core — included</div>
+        <ul><li>Kitchen</li><li>Bathroom &amp; laundry</li><li>Lounge / reading area</li><li>Rooftop</li><li>Security &amp; maintenance</li></ul>
+      </div>
+      <div class="tier">
+        <div class="tname">Low-cost add-on</div>
+        <ul><li>Rec room access</li><li>Games, casual hangout space</li></ul>
+      </div>
+      <div class="tier">
+        <div class="tname">Premium add-on</div>
+        <ul><li>Gym access</li><li>Coworking / WFH room</li></ul>
+      </div>
+      <div class="tier">
+        <div class="tname">Building-specific</div>
+        <ul><li>Pool (where available)</li><li>Other site-specific extras</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATHS / TABS -->
+<section class="paths section" id="paths">
+  <div class="wrap">
+    <div class="paths-head">
+      <span class="eyebrow">Find your path</span>
+      <h2>This means something different depending on who you are.</h2>
+      <p class="lead">Pick the one that's you.</p>
+    </div>
+
+    <div class="path-tabs" role="tablist">
+      <button class="path-tab active" data-path="resident">Resident</button>
+      <button class="path-tab" data-path="investor">Investor</button>
+      <button class="path-tab" data-path="developer">Developer</button>
+      <button class="path-tab" data-path="city">City Official</button>
+    </div>
+
+    <!-- RESIDENT PANEL -->
+    <div class="path-panel active" id="panel-resident">
+      <p style="color:var(--ink-soft); max-width:56ch; margin-bottom:24px;">Nothing here is a lease or a commitment. It's a way to tell us this should exist — and it's what turns "interesting idea" into real numbers we can bring to developers and the city.</p>
+      <form class="form-card" id="form-resident">
+        <div class="field"><label for="r-email">Email</label><input type="email" id="r-email" required autocomplete="email"></div>
+        <div class="field"><label>Would you live here?</label>
+          <div class="radio-row" id="r-wouldlive">
+            <label class="radio-opt"><input type="radio" name="wouldlive" value="Yes">Yes</label>
+            <label class="radio-opt"><input type="radio" name="wouldlive" value="Maybe">Maybe</label>
+            <label class="radio-opt"><input type="radio" name="wouldlive" value="No">No</label>
+          </div>
+        </div>
+        <div class="field"><label for="r-price">How much would you pay per month for a private room + shared amenities?</label>
+          <select id="r-price">
+            <option>Under $1,000</option>
+            <option>$1,000–$1,400</option>
+            <option>$1,400–$1,800</option>
+            <option>$1,800–$2,200</option>
+            <option>Over $2,200</option>
+          </select>
+        </div>
+        <div class="field"><label for="r-likely">Compared to a studio or 1BR, how likely is this for you?</label>
+          <select id="r-likely">
+            <option>Definitely this over a studio/1BR</option>
+            <option>Probably this</option>
+            <option>Only if nothing else works out</option>
+            <option>Probably not for me</option>
+          </select>
+        </div>
+        <div class="field"><label for="r-reason">What would make you say yes? (optional)</label><textarea id="r-reason" maxlength="400"></textarea></div>
+        <div class="submit-row"><button type="submit" class="btn btn-clay">Count me in</button><span class="status-msg" id="r-status"></span></div>
+      </form>
+      <div class="momentum"><b id="r-count">—</b>people have responded to the survey</div>
+    </div>
+
+    <!-- INVESTOR PANEL -->
+    <div class="path-panel" id="panel-investor">
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q">What's the actual return case? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Shared-infrastructure units cost less to build out per door than full private apartments (no kitchen/bath duplicated in every unit) and lease up faster because they hit a much lower price point per room. Lower build cost, faster absorption — the two levers that actually move return.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Is this just low-margin affordable housing? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">No — the Joie de Vivre precedent is the model here, not traditional affordable housing. Chip Conley turned a rundown Tenderloin motel into a design-led hotel that grew into one of the largest boutique operators in the country. Design and operational care create premium perception at low cost — margin comes from that gap, not from cutting corners.</div></div></div>
+        <div class="faq-item"><button class="faq-q">How does this fit SF's current incentives? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">San Francisco's Downtown Revitalization Financing District already commits $610.5M in tax-increment financing to office-to-housing conversions, with roughly 50 buildings qualifying. This model fits directly inside that program — it doesn't require a new policy, just a different use of one that already exists.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Does this scale past one building? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Yes — the community layer is already built as working software (a full-stack resident app: profiles, feed, events, RSVPs), so every new building launches with its community tooling ready on day one instead of building it from scratch.</div></div></div>
+      </div>
+      <form class="form-card" id="form-investor">
+        <div class="field"><label for="i-email">Email</label><input type="email" id="i-email" required autocomplete="email"></div>
+        <div class="field"><label for="i-note">What would you want to see next?</label><textarea id="i-note" maxlength="400"></textarea></div>
+        <div class="submit-row"><button type="submit" class="btn btn-clay">Request the one-pager</button><span class="status-msg" id="i-status"></span></div>
+      </form>
+      <div class="momentum"><b id="i-count">—</b>investors tracking this</div>
+    </div>
+
+    <!-- DEVELOPER PANEL -->
+    <div class="path-panel" id="panel-developer">
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q">What actually changes structurally? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Plumbing and kitchens need to be added where offices don't already have them, and egress/occupancy code has to be met for residential use. What's often already in place — structure, envelope, elevators, and in older buildings, operable windows — is the expensive part in ground-up construction. Older, smaller-floorplate buildings (the ones the city already flags as best suited for conversion) are also the ones least suited to standard full-apartment layouts, which is exactly where this model has room to work.</div></div></div>
+        <div class="faq-item"><button class="faq-q">What's the honest regulatory picture? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Zoning, occupancy/egress code, and utility retrofit requirements are real barriers — this isn't a simple switch to flip. That's exactly why this starts as a demand-test and conversation, not a construction plan.</div></div></div>
+        <div class="faq-item"><button class="faq-q">What's the tenant risk profile? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Deliberately mixed by age and income — students, service workers, retirees, professionals. That's lower exposure to any single market segment softening than a building leased to one demographic.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Is there a real floor this could pencil on? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">1455 Market Street is a strong candidate. A podium-level floor there runs about 66,000 square feet with 16-foot ceilings — tall enough to consider sleeping lofts within private rooms, adding usable volume without adding footprint. It has two existing kitchen/break areas in different zones of the floor, which map naturally onto two separate resident neighborhoods, each anchored by plumbing that's already in place. It also has a separate street entry and dedicated parking, meaning a pilot could run independently of the rest of the building's tenants.</div></div></div>
+      </div>
+      <form class="form-card" id="form-developer">
+        <div class="field"><label for="d-email">Email</label><input type="email" id="d-email" required autocomplete="email"></div>
+        <div class="field"><label for="d-note">Notes or questions</label><textarea id="d-note" maxlength="400"></textarea></div>
+        <div class="submit-row"><button type="submit" class="btn btn-clay">Request a feasibility conversation</button><span class="status-msg" id="d-status"></span></div>
+      </form>
+      <div class="momentum"><b id="d-count">—</b>developers tracking this</div>
+    </div>
+
+    <!-- CITY OFFICIAL PANEL -->
+    <div class="path-panel" id="panel-city">
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q">Doesn't this concentrate low-income residents in one building? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">The opposite — the model is deliberately mixed by age and income by design, not segmented. That mix is the point, not a side effect.</div></div></div>
+        <div class="faq-item"><button class="faq-q">How is this different from housing models the city has moved away from? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Two things: design and operational standard (consistent materials, real maintenance, funded staffing from day one — the same discipline that turned a rundown SF motel into one of the country's largest boutique hotel brands) and a documented, evenly-enforced community agreement rather than any judgment-based admission process. Screening is objective and behavior-based, not identity-based.</div></div></div>
+        <div class="faq-item"><button class="faq-q">How do you keep the building orderly without discriminatory screening? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Standard, legal screening (income, references, credit) at the door, plus a written community agreement, consistent enforcement with real consequences, and funded upkeep from day one. Source-of-income discrimination is illegal in San Francisco and this model doesn't rely on it — standards are behavioral and documented, applied the same to every resident.</div></div></div>
+        <div class="faq-item"><button class="faq-q">What would actually block this? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Zoning for residential use, occupancy/egress code built for offices rather than homes, and utility retrofit costs. None of these are unique to this model — they're the same barriers any office conversion faces, and the city's existing Downtown Revitalization Financing District was built specifically to help clear them.</div></div></div>
+        <div class="faq-item"><button class="faq-q">What would a pilot actually need from the city? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Nothing beyond what the existing conversion framework already offers — this is a proposal to use a program the city has already funded, differently, not a request for a new one.</div></div></div>
+        <div class="faq-item"><button class="faq-q">Is there an actual building this could work in? <span class="chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">One example worth naming directly: 1455 Market Street. The city already leases more than four floors there, roughly 157,000 square feet, with an option to buy the entire building. A single podium-level floor in that building runs about 66,000 square feet, has a separate street entry and dedicated parking independent of the rest of the building, and could operate as a self-contained pilot without disrupting other tenants. This isn't a hypothetical site — it's a building the city already has a financial relationship with.</div></div></div>
+      </div>
+      <form class="form-card" id="form-city">
+        <div class="field"><label for="c-email">Email</label><input type="email" id="c-email" required autocomplete="email"></div>
+        <div class="field"><label for="c-note">Questions or concerns</label><textarea id="c-note" maxlength="400"></textarea></div>
+        <div class="submit-row"><button type="submit" class="btn btn-clay">Request a briefing</button><span class="status-msg" id="c-status"></span></div>
+      </form>
+      <div class="momentum"><b id="c-count">—</b>city contacts tracking this</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>Urban Community Housing</b> — a concept for San Francisco. Not a real address. Not a financial offering.</div>
+    <a href="#" class="admin-link" id="admin-open">·</a>
+  </div>
+</footer>
+
+</div><!-- /main-view -->
+
+<!-- ADMIN VIEW -->
+<div id="admin-view">
+  <div class="wrap">
+    <div class="admin-gate" id="admin-gate">
+      <h2>Admin</h2>
+      <input type="password" id="admin-pass" placeholder="Password">
+      <button class="btn btn-outline" id="admin-submit">Enter</button>
+      <div class="status-msg err" id="admin-err"></div>
+    </div>
+    <div id="admin-content" style="display:none;">
+      <h2>Activity</h2>
+      <a href="#" id="admin-close" style="font-family:'Space Grotesk',sans-serif; font-size:0.85rem; color:var(--ink-soft);">← Back to site</a>
+
+      <h3 style="margin-top:36px;">Resident survey</h3>
+      <table class="admin-table" id="table-resident"><thead><tr><th>Email</th><th>Would live?</th><th>Price</th><th>Likelihood</th><th>Reason</th><th>Date</th></tr></thead><tbody></tbody></table>
+      <div class="admin-empty" id="empty-resident" style="display:none;">No responses yet.</div>
+
+      <h3>Investors</h3>
+      <table class="admin-table" id="table-investor"><thead><tr><th>Email</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table>
+      <div class="admin-empty" id="empty-investor" style="display:none;">No signups yet.</div>
+
+      <h3>Developers</h3>
+      <table class="admin-table" id="table-developer"><thead><tr><th>Email</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table>
+      <div class="admin-empty" id="empty-developer" style="display:none;">No signups yet.</div>
+
+      <h3>City officials</h3>
+      <table class="admin-table" id="table-city"><thead><tr><th>Email</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table>
+      <div class="admin-empty" id="empty-city" style="display:none;">No signups yet.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ---- path tabs ----
+  var pathTabs = document.querySelectorAll('.path-tab');
+  pathTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      pathTabs.forEach(function(t){ t.classList.remove('active'); });
+      document.querySelectorAll('.path-panel').forEach(function(p){ p.classList.remove('active'); });
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.path).classList.add('active');
+    });
+  });
+
+  // ---- FAQ accordions ----
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    q.addEventListener('click', function(){ item.classList.toggle('open'); });
+  });
+
+  // ---- storage helpers ----
+  async function safeGetList(key){
+    try{ var res = await window.storage.get(key, true); return res && res.value ? JSON.parse(res.value) : []; }
+    catch(e){ return []; }
+  }
+  async function safeSetList(key, list){
+    try{ await window.storage.set(key, JSON.stringify(list), true); return true; }
+    catch(e){ return false; }
+  }
+
+  async function refreshCounts(){
+    var r = await safeGetList('resident_signups');
+    var i = await safeGetList('investor_signups');
+    var d = await safeGetList('developer_signups');
+    var c = await safeGetList('city_signups');
+    document.getElementById('r-count').textContent = r.length;
+    document.getElementById('i-count').textContent = i.length;
+    document.getElementById('d-count').textContent = d.length;
+    document.getElementById('c-count').textContent = c.length;
+  }
+  refreshCounts();
+
+  // radio pills
+  document.querySelectorAll('.radio-opt').forEach(function(opt){
+    var input = opt.querySelector('input');
+    opt.addEventListener('click', function(){
+      document.querySelectorAll('#r-wouldlive .radio-opt').forEach(function(o){ o.classList.remove('checked'); });
+      opt.classList.add('checked'); input.checked = true;
+    });
+  });
+
+  // resident form
+  document.getElementById('form-resident').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var statusEl = document.getElementById('r-status');
+    var email = document.getElementById('r-email').value.trim();
+    if(!email){ statusEl.textContent='Add your email first.'; statusEl.className='status-msg err'; return; }
+    statusEl.textContent='Saving…'; statusEl.className='status-msg';
+    var wl = document.querySelector('#r-wouldlive input:checked');
+    var list = await safeGetList('resident_signups');
+    list.push({ email:email, wouldLive: wl?wl.value:'', price: document.getElementById('r-price').value, likely: document.getElementById('r-likely').value, reason: document.getElementById('r-reason').value.trim(), ts: new Date().toISOString() });
+    var ok = await safeSetList('resident_signups', list);
+    if(ok){ statusEl.textContent="You're on the list."; statusEl.className='status-msg ok'; e.target.reset(); document.querySelectorAll('#r-wouldlive .radio-opt').forEach(function(o){o.classList.remove('checked');}); refreshCounts(); }
+    else{ statusEl.textContent='Something went wrong — try again.'; statusEl.className='status-msg err'; }
+  });
+
+  function wireSimpleForm(formId, statusId, emailId, noteId, storageKey, okMsg){
+    document.getElementById(formId).addEventListener('submit', async function(e){
+      e.preventDefault();
+      var statusEl = document.getElementById(statusId);
+      var email = document.getElementById(emailId).value.trim();
+      if(!email){ statusEl.textContent='Add your email first.'; statusEl.className='status-msg err'; return; }
+      statusEl.textContent='Saving…'; statusEl.className='status-msg';
+      var list = await safeGetList(storageKey);
+      list.push({ email:email, note: document.getElementById(noteId).value.trim(), ts: new Date().toISOString() });
+      var ok = await safeSetList(storageKey, list);
+      if(ok){ statusEl.textContent=okMsg; statusEl.className='status-msg ok'; e.target.reset(); refreshCounts(); }
+      else{ statusEl.textContent='Something went wrong — try again.'; statusEl.className='status-msg err'; }
+    });
+  }
+  wireSimpleForm('form-investor','i-status','i-email','i-note','investor_signups',"You're in the loop.");
+  wireSimpleForm('form-developer','d-status','d-email','d-note','developer_signups',"Request sent.");
+  wireSimpleForm('form-city','c-status','c-email','c-note','city_signups',"Request sent.");
+
+  // ---- ADMIN ----
+  var ADMIN_PASSWORD = 'community2026';
+  var mainView = document.getElementById('main-view');
+  var adminView = document.getElementById('admin-view');
+  var adminGate = document.getElementById('admin-gate');
+  var adminContent = document.getElementById('admin-content');
+
+  function openAdmin(){ mainView.style.display='none'; adminView.classList.add('active'); }
+  function closeAdmin(){ adminView.classList.remove('active'); mainView.style.display=''; adminGate.style.display=''; adminContent.style.display='none'; document.getElementById('admin-pass').value=''; }
+
+  document.getElementById('admin-open').addEventListener('click', function(e){ e.preventDefault(); openAdmin(); });
+  document.getElementById('admin-close').addEventListener('click', function(e){ e.preventDefault(); closeAdmin(); });
+
+  document.getElementById('admin-submit').addEventListener('click', async function(){
+    var pass = document.getElementById('admin-pass').value;
+    var errEl = document.getElementById('admin-err');
+    if(pass !== ADMIN_PASSWORD){ errEl.textContent = 'Incorrect password.'; return; }
+    errEl.textContent = '';
+    adminGate.style.display = 'none';
+    adminContent.style.display = '';
+    await loadAdminTables();
+  });
+
+  function fillTable(tableId, emptyId, rows, cols){
+    var tbody = document.querySelector('#'+tableId+' tbody');
+    var emptyEl = document.getElementById(emptyId);
+    tbody.innerHTML = '';
+    if(!rows.length){ emptyEl.style.display=''; document.getElementById(tableId).style.display='none'; return; }
+    emptyEl.style.display='none'; document.getElementById(tableId).style.display='';
+    rows.slice().reverse().forEach(function(row){
+      var tr = document.createElement('tr');
+      cols.forEach(function(c){
+        var td = document.createElement('td');
+        var val = c === 'ts' ? new Date(row[c]).toLocaleString() : (row[c] || '—');
+        td.textContent = val;
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+  }
+
+  async function loadAdminTables(){
+    var r = await safeGetList('resident_signups');
+    var i = await safeGetList('investor_signups');
+    var d = await safeGetList('developer_signups');
+    var c = await safeGetList('city_signups');
+    fillTable('table-resident','empty-resident', r, ['email','wouldLive','price','likely','reason','ts']);
+    fillTable('table-investor','empty-investor', i, ['email','note','ts']);
+    fillTable('table-developer','empty-developer', d, ['email','note','ts']);
+    fillTable('table-city','empty-city', c, ['email','note','ts']);
+  }
+})();
+</script>
+
+</body>
+</html>
